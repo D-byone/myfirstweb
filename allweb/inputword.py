@@ -97,7 +97,7 @@ class relateinfo(object):
 	def POST(self):
 		print "==========relateinfo post"
 		global s
-		return render.relate(s.sort_word_dict())
+		return render.relate(s.sort_word_dict(False))
 
 
 

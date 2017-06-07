@@ -90,13 +90,10 @@ class selectword(object):
 		print "==========start write sentence and create word_dict"
 		if self.res.has_key('matches'):
 			self.connectdatabase()
-			# f1 = open('text.txt','w')
 			for match in self.res['matches']:
-				# sql = 'select * from tweets where id="%d"' % match['id']
 				sql = 'select * from tweets where id="%d"' % match['id']
 				self.cur.execute(sql)
 				r = self.cur.fetchall()
-
 				s = "%s\n" % r[0][3]
 				self.weibolist.append(s)
 				words = jieba.cut( s,cut_all = False)
@@ -106,9 +103,6 @@ class selectword(object):
 							self.word_dict[i] += 1
 						else:
 							self.word_dict[i] = 0
-
-				# f1.write(s.encode('utf8'))
-			# f1.close()
 			self.disconnectdatabase()
 			print "==========write sentence and create word_dict over"
 
@@ -138,15 +132,17 @@ class selectword(object):
 	# 	f1.close()
 
 	def creat_wordcloud(self):
+		word_cloud_list = []
+		word_cloud_list = self.sort_word_dict(True)
 		print "==========start creat_wordcloud"
 		l=['left','right','top','bottom']
 		html = '''<!DOCTYPE html><html><head lang="en">
-				<meta charset="utf-8"><style>.div{padding:30px 20px;}</style></head><body style="background-color: black"><div class="div">'''
-		for w,c in self.word_dict.items():
+				<meta charset="utf-8"></head><body style="background-color: black"><div>'''
+		for w in word_cloud_list:
 			color = 'rgb(%s, %s, %s)' % (str(random.randint(0,255)), str(random.randint(0,255)), str(random.randint(0,255)))
-			fontsize = int(c)
+			fontsize = int(w[1])
 			temp = ';float:%s;\">' % l[random.randint(0,3)]
-			html += '<span style=\"font-size:' + str(fontsize) + 'px;color:' + color + temp + "  " + w + "  " + '</span>'
+			html += '<span style=\"font-size:' + str(fontsize) + 'px;color:' + color + temp + "  " + w[0] + "  " + '</span>'
 
 		html += '''</div></body></html>'''
 		filename = "wordcloud.html"
@@ -176,14 +172,17 @@ class selectword(object):
 		# plt.show()
 
 
-	def sort_word_dict(self):
+	def sort_word_dict(self,flag=False):
 		print "==========start key_word sort"
 		for w in self.word_dict.keys():
 			if self.word_dict[w] == 0:
 				del self.word_dict[w]
 
 		word_list = sorted(self.word_dict.items(), key=lambda d:d[1], reverse = True)
-		param = min(100,len(word_list))
+		if flag == False:
+			param = min(100,len(word_list))
+		else:
+			param = min(1500,len(word_list))
 		relate_word = word_list[:param]
 		print "==========key_word sort over"
 		return relate_word

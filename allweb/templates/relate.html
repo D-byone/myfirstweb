@@ -1,0 +1,36 @@
+$def with (show_word)
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>相关度排名</title>
+		<style type="text/css">
+			.div_relatelist{
+				padding-top: 20px;
+				padding-left: 200px;
+				padding-right: 200px;
+			}
+			.h1{
+				font-size: 30px;
+				color: #F0F0F0;
+				font-family: "楷体";
+				text-align: center;
+			}
+			.li{
+				font-size: 20px;
+				color: #FFF;
+				font-family: "楷体";
+				margin-left: 45%;
+			}
+		</style>
+</head>
+<body style="background-color: black">
+		<h1 class="h1">相关度排名</h1>
+		<div class="div_relatelist">
+			<ol>
+			$for i in show_word:
+				<li class="li">$i[0].encode('utf8')  $i[1]</li>
+			</ol>>
+		</div>>
+</body>
+</html>

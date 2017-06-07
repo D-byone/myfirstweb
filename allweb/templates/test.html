@@ -1,0 +1,36 @@
+$def with (show_data)
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>测试</title>
+	<style type="text/css">
+		.div_content{
+			padding-top: 20px;
+			padding-left: 200px;
+			padding-right: 200px;
+		}
+		.h1{
+			font-size: 15px;
+			color: red;
+			font-family: "楷体";
+			text-align: center;
+		}
+		.li{
+			font-size: 20px;
+			color: #F0F0F0;
+			font-family: "楷体";
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="div_content" style="background-color: black">
+		<h1 class="h1">关联规则显示</h1>
+		<ol>
+			$for i in show_data:
+				<li class="li">$i</li>
+		</ol>
+	</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+$def with (show_data)
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>关联规则挖掘</title>
+	<style type="text/css">
+		.div_content{
+			padding-top: 20px;
+			padding-left: 200px;
+			padding-right: 200px;
+		}
+		.h2{
+			font-size: 25px;
+			color: #F0F0F0;
+			font-family: "楷体";
+			text-align: center;
+		}
+		.h1{
+			font-size: 30px;
+			color: #F0F0F0;
+			font-family: "楷体";
+			text-align: center;
+		}
+		.li{
+			font-size: 20px;
+			color: #FFF;
+			font-family: "楷体";
+			text-align: center;
+		}
+		.blockquote{
+			font-size: 18px;
+			color: #F5FFFA;
+			font-family: "楷体";
+			text-align: center;
+		}
+	</style>
+</head>
+<body style="background-color: black">
+	<div>
+		<h2 class="h2">利用概率分布进行关联规则挖掘</h2>
+		<p class="blockquote">电子商务网站上，某个商品页经常会有“购买该商品的用户还购买了”的推荐panel<br>
+			首先，用户购买的信息都存放在数据库里，把这些数据导出来，例如对每个人，都生成如下的tuple<br>
+			goods(USERi) = (goodsId1, goodsId2, ..., goodsIdN)<br> 
+			表示某个用户i购买了1,2..N种商品<br>
+			之后，需要做个排序，例如用户A购买了(4,5) 2种商品， 用户B购买了(5, 4)两种商品，应该说他们的购买特征是<br>
+			相同的，如果不排序，就会有(4, 5) != (5, 4)<br>
+			第二步，把所有用户购买的商品形成list<br>
+			goods_sets =  [(goods1, goods2, goodsN), (goods4, goods8), ...]<br>
+			第三步，利用nltk计算goods_sets概率分布<br>
+			goods_fd = nltk.FreqDist(goods_sets)<br>
+			第四步，结果出来了<br>
+			找最经常一起购买的商品组合前10位<br>
+			goods_fd[:10]<br>
+			找最不经常一起购买的商品组合10个<br>
+			goods_fd[-10:]</p>
+	</div>
+	<div class="div_content">
+		<h1 class="h1">关联规则显示</h1>
+		<ol>
+			$for i in show_data:
+				<li class="li">$i</li>
+				<br>
+		</ol>
+	</div>
+</body>
+</html>

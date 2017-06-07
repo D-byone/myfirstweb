@@ -1,0 +1,104 @@
+$def with (result)
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>搜索结果</title>
+	<style type="text/css">
+	.input1{
+		color:#FFF;
+		font-size: 40px;
+		font-family: "楷体";
+		position: relative;
+	}
+	.input2{
+		color:#789;
+		font-size: 35px;
+		font-family: "楷体";
+		position: relative;
+	}
+	.input3{
+		color:#FFF;
+		font-size: 35px;
+		font-family: "楷体";
+		position: relative;
+		background-color: black;
+	}
+	.funbtn{
+		color:#FFF;
+		font-size: 20px;
+		font-family: "楷体";
+		position: relative;
+		background-color: black;
+	}
+	.divinfo{
+		width:100%;
+		margin-top: 170px;
+		text-align: center;
+	}
+	.divbuts{
+		text-align: center;
+		padding-top: 15px;
+		padding-left: 35%;
+		text-align: center;
+	}
+	.div_h1{
+		text-align: center;
+		padding-top: 50px;
+		padding-left: 32px;
+		color: #FFF;
+		font-family: "楷体";
+	}
+	.h1{
+		font-size: 23px;
+	}
+	.divresult{
+		font-size: 20px;
+		color: #FFF;
+		font-family: "楷体";
+		padding-left: 30%;
+	}
+	.formfun{
+		float: left;
+		padding-right: 10px;
+	}
+	</style>
+	<title>this is first page</title>
+</head>
+	<body style="background-color: black">
+		<div class="divinfo">
+			<form method="post" action="/input">
+				<label class="input1" for="keyword"> 关键词:</label>
+				<input class="input2" type="text" name="keyword" value=$result[0] />
+				<input class="input3" type="submit" value="分析">
+			</form>
+		</div>
+
+		<div class="divbuts">
+			<form class="formfun" method="post" action="/weibolist">
+				<input class="funbtn" type="submit" value="文本显示">
+			</form>
+			<form class="formfun" method="post" action="/relate">
+				<input class="funbtn" type="submit" value="相关度排名">
+			</form>
+			<form class="formfun" method="post" action="/wordcloud">
+				<input class="funbtn" type="submit" value="生成词云">
+			</form>
+			<form class="formfun" method="post" action="/relatedata">
+				<input class="funbtn" type="submit" value="关联规则挖掘">
+			</form>
+<!-- 			<form class="formfun" method="post" action="/test">
+				<input class="funbtn" type="submit" value="测试">
+			</form> -->
+		</div>
+		<div class="div_h1">
+			<p class="h1">$result[1]</p>
+		</div>
+		<div class="divresult">
+				<ol>
+					$for i in result[2]:
+						<li>$i</li>
+				</ol>
+		</div>
+	</body>
+</html>

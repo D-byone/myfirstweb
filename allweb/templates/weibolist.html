@@ -1,0 +1,38 @@
+$def with (weibolist)
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="utf-8">
+	<title>文本显示</title>
+	<style type="text/css">
+		.div_weibolist{
+			padding-top: 20px;
+			padding-left: 200px;
+			padding-right: 200px;
+			font-family: "楷体";
+		}
+		.h1{
+			font-size: 30px;
+			color: #F0F0F0;
+			font-family: "楷体";
+			text-align: center;
+		}
+		.li{
+			font-size: 20px;
+			color: #FFF;
+			font-family: "楷体";
+			text-align: center;
+		}
+	</style>
+</head>
+<body style="background-color: black">
+	<div class="div_weibolist">
+			<h1 class="h1">微博列表:</h1>
+				<ol>
+					$for i in weibolist:
+					<li class="li">$i</li><br>
+				</ol>
+	</div>
+
+</body>
+</html>

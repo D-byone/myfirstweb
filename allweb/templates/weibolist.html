@@ -23,15 +23,40 @@ $def with (weibolist)
 			font-family: "楷体";
 			text-align: center;
 		}
+		.funbtn{
+			color:#FFF;
+			font-size: 20px;
+			font-family: "楷体";
+			position: relative;
+			background-color: black;
+		}
+		.formfunlast{
+			float: left;
+			padding-right: 10px;
+			padding-left: 60%;
+		}
+		.formfunnext{
+			float: left;
+			padding-right: 10px;
+			margin-left: 30px;
+		}
 	</style>
 </head>
 <body style="background-color: black">
 	<div class="div_weibolist">
 			<h1 class="h1">微博列表:</h1>
-				<ol>
-					$for i in weibolist:
+				<ol start=$weibolist[0]>
+					$for i in weibolist[1]:
 					<li class="li">$i</li><br>
 				</ol>
+	</div>
+	<div>
+		<form class="formfunlast" method="post" action="/weibolistlast">
+				<input class="funbtn" type="submit" value="上一页">
+		</form>
+		<form class="formfunnext" method="post" action="/weibolistnext">
+				<input class="funbtn" type="submit" value="下一页">
+		</form>
 	</div>
 
 </body>

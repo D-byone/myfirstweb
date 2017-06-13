@@ -13,7 +13,8 @@ urls = (
 	'/input','inputword',
 	'/wordcloud','createwordcloud',
 	'/test','test',
-	'/weibolist','show_weibolist',
+	'/weibolistnext','show_weibolistnext',
+	'/weibolistlast','show_weibolistlast',
 	'/relate','relateinfo',
 	'/relatedata','create_relatedata',
 )
@@ -83,14 +84,22 @@ class createwordcloud(object):
 		global s
 		s.creat_wordcloud()
 		return render.wordcloud()
-# 文本显示
-class show_weibolist(object):
+# 文本显示下一页
+class show_weibolistnext(object):
 	def POST(self):
-		print "==========show_weibolist post"
-		return render.weibolist(s.show_text())
+		print "==========show_weibolistnext post"
+		return render.weibolist(s.show_text(True))
 
 	def GET(self):
-		print "==========show_weibolist get"
+		print "==========show_weibolistnext get"
+# 文本显示上一页
+class show_weibolistlast(object):
+	def POST(self):
+		print "==========show_weibolistlast post"
+		return render.weibolist(s.show_text(False))
+
+	def GET(self):
+		print "==========show_weibolistlast get"
 
 # 相关词排名
 class relateinfo(object):
@@ -100,7 +109,7 @@ class relateinfo(object):
 		return render.relate(s.sort_word_dict(False))
 
 
-
+# 关联规则
 class create_relatedata(object):
 	def POST(self):
 		print "==========create_relatedata post"
@@ -109,7 +118,7 @@ class create_relatedata(object):
 		for i in s.relateruledig():
 			stext = ''
 			for j in i:
-				stext += " %s|" % j
+				stext += "%s|" % j
 			stext += '\n'
 			relatedatalist.append(stext)
 		return render.relatedata(relatedatalist)

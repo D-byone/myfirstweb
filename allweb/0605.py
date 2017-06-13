@@ -82,17 +82,16 @@
 
 
 
-from os import path
-from scipy.misc import imread
-import matplotlib.pyplot as plt
-from wordcloud import WordCloud
-import codecs
-import jieba
-import os
-from os import path
-from PIL import Image,ImageDraw,ImageFont
-import nltk
-
+# from os import path
+# from scipy.misc import imread
+# import matplotlib.pyplot as plt
+# from wordcloud import WordCloud
+# import codecs
+# import jieba
+# import os
+# from os import path
+# from PIL import Image,ImageDraw,ImageFont
+# import nltk
 
 def draw_wordcloud():
 	# comment_text = open("text.txt",'r').read()
@@ -126,9 +125,23 @@ def draw_wordcloud():
 	print goods_fd[-10:]
 
 
+import re
+def filterSpecialSymbol(s):
+	# speciaSym = re.compile('[^\u4E00-\u9FA5A-Za-z0-9]|[/\.！\@]+$')
+	r1 = u'[！’!"#$%&\'\s()*+,-./:;<=>?@，。￥?★、…【】《》？“”‘’！[\]^_`{|}~]+'
+	r2 = u'[\]'
+	# speciaSym = re.compile('[^\u4e00-\u9fa5_a-zA-Z0-9]')
+	tem = re.sub(r1,'',s)
+	print tem
+	# twm = re.sub(r2,'',tem)
+	# print twm
+
+
 
 if __name__ == '__main__':
-	draw_wordcloud()
+	# draw_wordcloud()
+	s = u'ahjkfashfkja798sh王飞龙fajdlc123\.！@#的￥%……&**'
+	filterSpecialSymbol(s)
 
 
 
